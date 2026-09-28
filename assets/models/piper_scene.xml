@@ -1,0 +1,13 @@
+<mujoco model="piper_blue_checker_scene">
+  <include file="piper.xml"/>
+  <asset>
+    <texture name="floor_checker" type="2d" builtin="checker"
+             rgb1="0.1 0.2 0.3" rgb2="0.2 0.3 0.4" width="512" height="512"/>
+    <material name="floor_blue" texture="floor_checker" texuniform="true"
+              texrepeat="2.5 2.5" reflectance="0.05"/>
+  </asset>
+  <worldbody>
+    <geom name="visual_floor" type="plane" pos="0 0 -0.01" size="2 2 0.1"
+          material="floor_blue" contype="0" conaffinity="0"/>
+  </worldbody>
+</mujoco>

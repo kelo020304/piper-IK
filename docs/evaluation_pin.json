@@ -1,0 +1,204 @@
+{
+  "ik": "pinocchio",
+  "samples": 32,
+  "seed": 94027,
+  "iterations": 200,
+  "success_rate": 0.5,
+  "position_median_m": 0.0038868870875802463,
+  "orientation_median_deg": 0.5903082118202516,
+  "scope": "Independent random reachable tool0 poses; local IK from random starts; no restarts, smoothing, dynamics, collisions or hardware. Not the historical 256-case validation set.",
+  "cases": [
+    {
+      "position_m": 3.835830674424026e-06,
+      "orientation_rad": 3.709409542715662e-05,
+      "seconds": 0.004676632932387292,
+      "success": true
+    },
+    {
+      "position_m": 1.7747562600200066e-06,
+      "orientation_rad": 1.5227947537296365e-05,
+      "seconds": 0.0031119820196181536,
+      "success": true
+    },
+    {
+      "position_m": 0.006287656829720981,
+      "orientation_rad": 0.01556645295510228,
+      "seconds": 0.003992351936176419,
+      "success": false
+    },
+    {
+      "position_m": 0.014861234994376037,
+      "orientation_rad": 0.05491419981929541,
+      "seconds": 0.005318445968441665,
+      "success": false
+    },
+    {
+      "position_m": 0.24004384196476417,
+      "orientation_rad": 0.3091662606177166,
+      "seconds": 0.004887672024779022,
+      "success": false
+    },
+    {
+      "position_m": 0.6237021310444343,
+      "orientation_rad": 0.0774934672238023,
+      "seconds": 0.009031277033500373,
+      "success": false
+    },
+    {
+      "position_m": 4.212460434991348e-06,
+      "orientation_rad": 1.8906845273587966e-05,
+      "seconds": 0.0022573620080947876,
+      "success": true
+    },
+    {
+      "position_m": 0.1971428330144776,
+      "orientation_rad": 0.22343190861265924,
+      "seconds": 0.007003720966167748,
+      "success": false
+    },
+    {
+      "position_m": 0.18827320665263755,
+      "orientation_rad": 0.5320558755307944,
+      "seconds": 0.008827659068629146,
+      "success": false
+    },
+    {
+      "position_m": 0.5037792768037176,
+      "orientation_rad": 0.17838389478438893,
+      "seconds": 0.003778795013204217,
+      "success": false
+    },
+    {
+      "position_m": 0.002680266093928245,
+      "orientation_rad": 0.006356969973837319,
+      "seconds": 0.001559661002829671,
+      "success": true
+    },
+    {
+      "position_m": 0.1402888759189569,
+      "orientation_rad": 0.1041624937020985,
+      "seconds": 0.007643181015737355,
+      "success": false
+    },
+    {
+      "position_m": 0.4100840331227881,
+      "orientation_rad": 0.27719840150083164,
+      "seconds": 0.020661532995291054,
+      "success": false
+    },
+    {
+      "position_m": 1.2607813016489832e-06,
+      "orientation_rad": 9.143968423121512e-06,
+      "seconds": 0.0012495029950514436,
+      "success": true
+    },
+    {
+      "position_m": 3.7924295520103605e-05,
+      "orientation_rad": 0.0002203256539873597,
+      "seconds": 0.0029510289896279573,
+      "success": true
+    },
+    {
+      "position_m": 1.43270714182747e-07,
+      "orientation_rad": 2.1047224255067848e-06,
+      "seconds": 0.0016028640093281865,
+      "success": true
+    },
+    {
+      "position_m": 3.783930712854272e-05,
+      "orientation_rad": 0.00041576847740363193,
+      "seconds": 0.002284653950482607,
+      "success": true
+    },
+    {
+      "position_m": 0.1399746298814135,
+      "orientation_rad": 0.1363429750994387,
+      "seconds": 0.00511078501585871,
+      "success": false
+    },
+    {
+      "position_m": 0.09962608411073799,
+      "orientation_rad": 0.39161601028966475,
+      "seconds": 0.006334592937491834,
+      "success": false
+    },
+    {
+      "position_m": 9.98889768216048e-05,
+      "orientation_rad": 0.00017278563845672936,
+      "seconds": 0.005651453044265509,
+      "success": true
+    },
+    {
+      "position_m": 0.24259312387659354,
+      "orientation_rad": 0.6524970973779198,
+      "seconds": 0.006897915969602764,
+      "success": false
+    },
+    {
+      "position_m": 0.29292520219350676,
+      "orientation_rad": 0.2770537054953431,
+      "seconds": 0.004911652998998761,
+      "success": false
+    },
+    {
+      "position_m": 9.328358357414655e-06,
+      "orientation_rad": 4.478410411048746e-06,
+      "seconds": 0.002049306989647448,
+      "success": true
+    },
+    {
+      "position_m": 1.4342414566223866e-05,
+      "orientation_rad": 0.0001383213088869812,
+      "seconds": 0.0020118149695917964,
+      "success": true
+    },
+    {
+      "position_m": 9.508438456612822e-07,
+      "orientation_rad": 7.885417556395578e-06,
+      "seconds": 0.002368615008890629,
+      "success": true
+    },
+    {
+      "position_m": 3.683878971304922e-05,
+      "orientation_rad": 0.0003446907847143309,
+      "seconds": 0.0019014939898625016,
+      "success": true
+    },
+    {
+      "position_m": 0.006670465138871894,
+      "orientation_rad": 0.01424867382180968,
+      "seconds": 0.004699867917224765,
+      "success": false
+    },
+    {
+      "position_m": 2.9934488882845085e-06,
+      "orientation_rad": 2.8675842947350683e-05,
+      "seconds": 0.0022803989704698324,
+      "success": true
+    },
+    {
+      "position_m": 0.6838885384894682,
+      "orientation_rad": 0.8097596942225185,
+      "seconds": 0.01287792099174112,
+      "success": false
+    },
+    {
+      "position_m": 5.157585506308139e-06,
+      "orientation_rad": 8.147401036832501e-06,
+      "seconds": 0.00215432804543525,
+      "success": true
+    },
+    {
+      "position_m": 5.1621398067690854e-06,
+      "orientation_rad": 4.998599265583839e-05,
+      "seconds": 0.003086989978328347,
+      "success": true
+    },
+    {
+      "position_m": 0.0050935080812322476,
+      "orientation_rad": 0.03273680084188984,
+      "seconds": 0.0024130280362442136,
+      "success": false
+    }
+  ]
+}

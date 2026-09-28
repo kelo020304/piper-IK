@@ -1,0 +1,36 @@
+{
+  "source": "https://github.com/agilexrobotics/piper_ros",
+  "revision": "6cf947c58797775dba148861729a5e87c99564bf",
+  "model_sha256": "0bbb92f24e21fa7d9b290d6fc3e8e55b151043f7c541e5bfcce512d0c0272e08",
+  "n_random_fk_checks": 100,
+  "position_error_max_m": 3.357306211760598e-16,
+  "rotation_matrix_error_max": 2.679393143645032e-15,
+  "ee_frame": "tool0 == link6 origin",
+  "custom_gripper_tcp": "unknown; not inferred",
+  "joint_limits": [
+    [
+      -2.618,
+      2.168
+    ],
+    [
+      0.0,
+      3.14
+    ],
+    [
+      -2.967,
+      0.0
+    ],
+    [
+      -1.745,
+      1.745
+    ],
+    [
+      -1.22,
+      1.22
+    ],
+    [
+      -2.0944,
+      2.0944
+    ]
+  ]
+}

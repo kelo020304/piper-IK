@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Piper IK · ROS-free</title><style>
+:root{color-scheme:light;--ink:#192d38;--teal:#147e78;--muted:#59707d;--line:#dce6e8}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;color:var(--ink);background:#f3f7f7;font:16px/1.8 system-ui,-apple-system,"Noto Sans CJK SC",sans-serif}
+header{background:white;border-bottom:1px solid var(--line);padding:14px max(20px,calc((100vw - 1240px)/2));display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+header strong{letter-spacing:2px}a{color:var(--teal);text-underline-offset:3px}header a{text-decoration:none;font-size:14px}
+.layout{max-width:1280px;margin:auto;display:grid;grid-template-columns:210px minmax(0,1fr);gap:32px;padding:32px 24px}
+aside{align-self:start;position:sticky;top:20px;max-height:90vh;overflow:auto;font-size:13px}aside ul{list-style:none;padding-left:12px}aside>div>ul{padding-left:0}aside a{text-decoration:none}
+main{min-width:0;background:white;border:1px solid var(--line);border-radius:16px;padding:32px 40px}
+h1{font-size:32px;line-height:1.3;margin-top:0}h2{margin-top:38px;border-top:1px solid var(--line);padding-top:22px;font-size:23px}h3{font-size:19px}h1,h2,h3{letter-spacing:.2px}
+p{margin:16px 0}blockquote{margin:20px 0;padding:10px 18px;border-left:4px solid var(--teal);background:#eff8f6;font-size:15px}blockquote p{margin:5px 0}
+.table-wrap{overflow:auto;max-width:100%;margin:20px 0}table{border-collapse:collapse;font-size:14px;min-width:600px;width:100%}th,td{text-align:left;vertical-align:top;padding:11px 12px;border:1px solid var(--line)}th{background:#edf5f4}tr:nth-child(even){background:#fafcfc}
+pre{overflow:auto;background:#152b36;color:#e3f1f2;padding:18px;border-radius:10px;font-size:13px;line-height:1.7}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}p code,td code,li code{font-size:.87em;background:#eef3f4;border-radius:3px;padding:2px 4px}pre code{background:none;overflow-wrap:normal}
+img{max-width:100%}footer{color:var(--muted);font-size:12px;margin-top:40px}li{margin:6px 0}
+@media(max-width:800px){.layout{display:block;padding:16px 10px}aside{position:static;max-height:220px;margin:0 10px 20px}main{padding:24px 18px}h1{font-size:26px}header{padding:12px 18px;gap:14px}}
+@media print{body{background:white}.layout{display:block;padding:0}aside,header{display:none}main{border:0;padding:0}pre{white-space:pre-wrap;color:black;background:#f1f3f4}.table-wrap{overflow:visible}table{min-width:0}h2{break-after:avoid}tr{break-inside:avoid}}
+</style></head><body><header><strong>PIPER IK</strong><a href="README.html">开始</a> <a href="docs/RL.html">RL</a> <a href="docs/PINOCCHIO.html">Pinocchio</a> <a href="docs/HARDWARE.html">真机</a> <a href="docs/VALIDATION.html">验证</a></header><div class="layout"><aside aria-label="章节导航"><div class="toc">
+<ul>
+<li><a href="#1">1. 安装</a></li>
+<li><a href="#2">2. 启动与切换</a></li>
+<li><a href="#3">3. 每一步到底是绝对量还是相对量</a><ul>
+<li><a href="#_1">四元数与旋转：不要混用</a></li>
+<li><a href="#_2">接入你自己的末端策略</a></li>
+</ul>
+</li>
+<li><a href="#4">4. 真机：显式授权后再操作</a></li>
+<li><a href="#5">5. 常用调整</a></li>
+<li><a href="#6">6. 测试与维护</a></li>
+<li><a href="#7">7. 目录与许可</a></li>
+</ul>
+</div>
+</aside><main><h1 id="piper-ik-ros-free">Piper IK · ROS-free</h1>
+<p>Piper 六轴机械臂的末端位姿控制台：<strong>Pinocchio 数值 IK / PPO 学习 IK</strong>，浏览器键盘操作，MuJoCo / Isaac Sim 可视化，可选官方 Piper SDK 真机执行。</p>
+<p><strong>不需要 ROS、roscore 或 ROS 工作空间。</strong> URDF/网格来自开源 Piper 模型，但运行和训练都不依赖 ROS。模型、现有 PPO 权重和前端资源已包含，无需下载 FastUMI 数据。</p>
+<blockquote>
+<p>当前仿真是关节位置写入后的运动学可视化，不是电机动力学仿真。RL 是 IK 求解器，不是视觉任务策略，也不包含碰撞规避或 VLA action-chunk 调度。默认不会连接、使能或控制真机。</p>
+</blockquote>
+<p><a href="README.html">HTML 阅读版</a> · <a href="docs/RL.html">RL 训练与 reward</a> · <a href="docs/PINOCCHIO.html">Pinocchio 与代价函数</a> · <a href="docs/HARDWARE.html">真机操作</a> · <a href="docs/VALIDATION.html">验证边界</a></p>
+<p><img alt="MuJoCo 运动学控制台：实际与目标 TCP、键盘微调、两种 IK" src="docs/images/console.png" /></p>
+<h2 id="1">1. 安装</h2>
+<p>推荐 Ubuntu 22.04 / 24.04、Python 3.12。CPU 即可运行两种 IK；RL 训练另需 NVIDIA CUDA GPU。Isaac Sim 单独安装。</p>
+<pre><code class="language-bash">git clone https://github.com/kelo020304/piper-IK.git
+cd piper-IK
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+</code></pre>
+<p>已有 Python 环境可直接设置 <code>PIPER_IK_PYTHON=/absolute/path/to/python</code>。启动脚本依次使用该变量、仓库 <code>.venv/bin/python</code>、PATH 中的 <code>python3</code>，并清理 ROS 常见的库路径污染。</p>
+<p>安装依赖若失败先确认 Python 版本；本仓库固定 <code>pin==3.7.0</code>、<code>ruckig==0.12.2</code>，不保证其他组合。已测试环境见 <a href="https://github.com/kelo020304/piper-IK/blob/main/docs/runtime_versions.json">版本记录</a>。</p>
+<h2 id="2">2. 启动与切换</h2>
+<pre><code class="language-bash"># MuJoCo 原生窗口 + 网页，Pinocchio
+./run.sh --sim mujoco --ik pinocchio
+
+# 先 Ctrl+C 退出上一实例，再启动 RL
+./run.sh --sim mujoco --ik rl
+
+# 无原生窗口，保留网页模型及仿真截图
+./run.sh --sim mujoco --ik rl --headless
+
+# Isaac Sim 自带 python.sh 路径由用户提供；主控制台仍使用 .venv
+./run.sh --sim isaac --ik pinocchio --isaac-python /absolute/path/to/isaacsim/python.sh
+</code></pre>
+<p>浏览器打开 <strong>http://127.0.0.1:8765</strong>，点击“接管键盘”。顶部可直接切换 Pinocchio / RL；切换仿真器需要退出并重新启动。只启动仿真可用 <code>--port 8766</code>；真机不得用多个端口同时控制同一 CAN。</p>
+<p>键盘沿<strong>机器人基座轴</strong>操作，不沿摄像机或当前末端轴：W/S 为 ±X，A/D 为 ±Y，↑/↓ 为 ±Z；Q/E 绕 ±Z，Z/C 绕 ±Y，R/F 绕 ±X。平移步长为 mm，旋转步长为度。按住按键持续更新目标；后台约 50 Hz 求解和发送轨迹，键盘增量最多约 11 Hz。切窗口只清除按键，已接受目标仍继续跟踪；断开控制连接或点击暂停会停止。</p>
+<h2 id="3">3. 每一步到底是绝对量还是相对量</h2>
+<p>约定 <code>T_BF</code> 表示 <strong>tool0 坐标系 F 在基座 B 中的位姿</strong>，作用为把 F 中坐标变换到 B。基座与仿真 world 重合。单位：m、rad；显示可转换为 mm、度。</p>
+<p><code>tool0</code> 在当前六轴模型中与 <code>link6</code> 原点重合；代码中的 <code>flange</code> 指这个模型帧，不自动等于你夹爪尖端。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>输入 / 输出</th>
+<th>绝对或相对</th>
+<th>坐标系与实现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SDK 反馈</td>
+<td>六个关节角 <code>q_measured</code></td>
+<td>绝对关节配置</td>
+<td><code>q_model = radians(raw / 1000) - zero_offset</code>；关节不是 xyz 坐标</td>
+</tr>
+<tr>
+<td>正运动学</td>
+<td><code>T_BF = FK(q)</code></td>
+<td>绝对位姿</td>
+<td>基座 → tool0；<a href="https://github.com/kelo020304/piper-IK/blob/main/piper_ik/engine.py">engine.py</a> 的 <code>flange()</code></td>
+</tr>
+<tr>
+<td>TCP 配置</td>
+<td><code>T_FT</code></td>
+<td>固定相对位姿</td>
+<td><code>tcp_xyz_m</code> 是 TCP 原点在 tool0 中的位置；<code>tcp_rpy_deg</code> 为 SciPy 小写 <code>xyz</code> 外禀欧拉角</td>
+</tr>
+<tr>
+<td>当前 TCP</td>
+<td><code>T_BT = T_BF @ T_FT</code></td>
+<td>绝对位姿</td>
+<td>基座中的实际工具位姿；默认 TCP 偏移为零</td>
+</tr>
+<tr>
+<td>键盘平移</td>
+<td><code>p_goal += Δp_B</code></td>
+<td>增量输入 → 绝对目标</td>
+<td>累加到上一个目标，不累加到滞后的实测位置</td>
+</tr>
+<tr>
+<td>键盘旋转</td>
+<td><code>R_goal = Exp(Δθ_B) @ R_goal</code></td>
+<td>增量输入 → 绝对朝向</td>
+<td>左乘：绕基座轴，TCP 位置保持不变；不是绕世界原点公转</td>
+</tr>
+<tr>
+<td>外部 <code>pose_target</code></td>
+<td><code>position_m</code> + <code>quaternion_xyzw</code></td>
+<td><strong>绝对 TCP 目标</strong></td>
+<td>必须 <code>frame: base</code>，覆盖目标，不再次累加</td>
+</tr>
+<tr>
+<td>末端参考平滑</td>
+<td><code>T_BT_goal → T_BT_ref</code></td>
+<td>绝对参考位姿</td>
+<td>三层低通；平移线性、旋转按最短旋转向量过渡</td>
+</tr>
+<tr>
+<td>转换 IK 目标</td>
+<td><code>T_BF_goal = T_BT_ref @ inverse(T_FT)</code></td>
+<td>绝对 tool0 位姿</td>
+<td>两个 IK 求解器接收同一种目标</td>
+</tr>
+<tr>
+<td>Pinocchio IK</td>
+<td><code>Log(T_current⁻¹ @ T_goal)</code> → <code>Δq</code> → <code>q_ik</code></td>
+<td>局部相对误差 → 绝对关节解</td>
+<td>误差/Jacobian 在当前 tool0 的 LOCAL 帧表达；不是改变目标坐标系</td>
+</tr>
+<tr>
+<td>RL IK</td>
+<td>当前/目标绝对 pose + 误差 → <code>Δq</code> → <code>q_ik</code></td>
+<td>策略输出关节增量</td>
+<td><code>q_ik = clip(q + 0.2 × action)</code>；不是直接输出末端增量</td>
+</tr>
+<tr>
+<td>Ruckig</td>
+<td><code>q_ik</code> → <code>q_command</code></td>
+<td>绝对关节目标 → 连续关节采样</td>
+<td>保留上一拍规划速度、加速度；按速度/加速度/jerk 约束过渡</td>
+</tr>
+<tr>
+<td>SDK 发送</td>
+<td><code>JointCtrl(J1,...,J6)</code></td>
+<td><strong>绝对电机关节角</strong></td>
+<td><code>round(degrees(q_command + zero_offset) × 1000)</code>；SDK 单位为 0.001°</td>
+</tr>
+<tr>
+<td>显示</td>
+<td>actual / target / reference</td>
+<td>基座中的绝对 TCP 位姿</td>
+<td>真机 actual 来自实测关节 FK；command 与 actual 不混用</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="_1">四元数与旋转：不要混用</h3>
+<ul>
+<li>WebSocket、SciPy、浏览器：<code>[x,y,z,w]</code>；单位旋转是 <code>[0,0,0,1]</code>。</li>
+<li>RL 26 维观测内部、MuJoCo：<code>[w,x,y,z]</code>，规范到 <code>w ≥ 0</code>；代码完成转换。</li>
+<li>RL 姿态误差为 <code>Log(R_goal @ R_current.T)</code>，在基座轴表达；Pinocchio 用 LOCAL SE(3) 误差。两种内部误差不同，但接收同一个基座绝对目标。</li>
+<li>当前实机没有额外全局定位：这里的“绝对”是<strong>相对机器人基座固定原点</strong>，不是房间地图坐标。</li>
+</ul>
+<h3 id="_2">接入你自己的末端策略</h3>
+<p>同源 WebSocket <code>/ws</code> 先发送 <code>{"type":"claim"}</code> 获取控制权，硬件模式还需连接、使能。每条消息处理完成返回 <code>ack</code>，错误返回 <code>error</code>，状态异步推送。</p>
+<p>下面是<strong>格式示例，不是通用安全目标</strong>，先在仿真中用当前 actual 附近的小目标测试：</p>
+<pre><code class="language-json">{
+  &quot;type&quot;: &quot;pose_target&quot;,
+  &quot;frame&quot;: &quot;base&quot;,
+  &quot;position_m&quot;: [0.25, 0.0, 0.30],
+  &quot;quaternion_xyzw&quot;: [0.0, 0.0, 0.0, 1.0]
+}
+</code></pre>
+<p>如果上游给的是基座增量：<code>p_next = p_previous_goal + Δp_B</code>、<code>R_next = Exp(Δθ_B) @ R_previous_goal</code>。如果给的是工具局部平移/旋转：<code>p_next = p_previous_goal + R_previous_goal @ Δp_T</code>、<code>R_next = R_previous_goal @ Exp(Δθ_T)</code>。先按上游定义转换，再发绝对目标。不要把相对动作直接填进 <code>position_m</code>。</p>
+<p>这里仅处理最新目标，<strong>没有 action chunk 的时间戳、队列或延迟补偿</strong>。FastUMI / π0.5 输出的坐标系、旋转编码和夹爪动作需要独立适配；本仓库不控制夹爪开合。</p>
+<h2 id="4">4. 真机：显式授权后再操作</h2>
+<pre><code class="language-bash">source .venv/bin/activate
+python -m pip install -r requirements-hardware.txt
+
+# 仅在 can0 尚未配置且没有控制程序连接时配置；这里不会启动电机
+sudo ip link set can0 down
+sudo ip link set can0 type can bitrate 1000000
+sudo ip link set can0 up
+ip -details link show can0
+
+./run.sh --sim mujoco --ik pinocchio --allow-hardware --can can0
+# RL 使用 --ik rl；先退出上一控制台
+</code></pre>
+<p>网页顺序：<strong>接管 → 连接 → 使能 → 回零 → 键盘操作</strong>。启动命令本身不连接、不使能、不回零。详细行为见 <a href="docs/HARDWARE.html">真机文档</a>。</p>
+<p>“回零”是 <strong>SDK 的六关节角归零</strong>，模型目标为 <code>-joint_zero_offsets_rad</code>，与 <code>initial_q</code>、首次使能姿态不同。“返回安全位置并失能”返回本次 CAN 连接首次成功使能时的关节姿态，到位稳定保持 3 秒后失能；这个姿态由用户确认物理上安全。</p>
+<h2 id="5">5. 常用调整</h2>
+<p>编辑 <code>config.json</code>，或用 <code>./run.sh --config /absolute/path/to/my-config.json ...</code>。运行中不自动重新加载。<code>--can</code> 与 <code>--allow-hardware</code> 只对当前进程生效。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>默认</th>
+<th>调整意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>target_filter_tau_s</code></td>
+<td>0.06 s</td>
+<td>三层参考滤波的每层时间常数；增大更平滑、滞后更大；不是固定延迟 60 ms</td>
+</tr>
+<tr>
+<td><code>max_joint_acceleration_rad_s2</code></td>
+<td>1.0</td>
+<td>Ruckig 软件加速度；越小启动/制动越柔和，也更慢</td>
+</tr>
+<tr>
+<td><code>max_joint_jerk_rad_s3</code></td>
+<td>10.0</td>
+<td>限制加速度变化率；降低可减轻突变，也增加跟踪滞后</td>
+</tr>
+<tr>
+<td><code>max_joint_velocity_rad_s</code></td>
+<td>null</td>
+<td>不加额外统一速度上限；真机仍使用 SDK 读回的逐轴上限，仿真使用 URDF 上限</td>
+</tr>
+<tr>
+<td><code>target_linear_speed_m_s</code> / <code>target_angular_speed_rad_s</code></td>
+<td>null / null</td>
+<td>不额外限制每层末端参考的速度；滤波仍有效</td>
+</tr>
+<tr>
+<td><code>speed_percent</code></td>
+<td>5</td>
+<td>SDK 运动速度百分比，不是 rad/s；当前代码接受 1–20</td>
+</tr>
+<tr>
+<td><code>home_velocity_rad_s</code></td>
+<td>0.08</td>
+<td>回零/返回首次使能姿态的关节速度上限，不随 IK 模式改变</td>
+</tr>
+<tr>
+<td><code>tcp_xyz_m</code> / <code>tcp_rpy_deg</code></td>
+<td>全零</td>
+<td>tool0 → 实际 TCP 的固定变换；自制夹爪必须校准</td>
+</tr>
+<tr>
+<td><code>joint_zero_offsets_rad</code></td>
+<td>全零</td>
+<td>SDK 零点与模型零点之间的偏移；不是末端坐标偏移</td>
+</tr>
+<tr>
+<td><code>initial_q</code></td>
+<td>配置内六轴数组</td>
+<td>仅仿真/未连接时占位初姿；真机使能时从反馈初始化</td>
+</tr>
+</tbody>
+</table></div>
+<p>Pinocchio 的误差权重、阻尼、迭代次数在 <a href="docs/PINOCCHIO.html">独立文档</a>；RL 的 reward、观测、训练命令在 <a href="docs/RL.html">独立文档</a>。</p>
+<h2 id="6">6. 测试与维护</h2>
+<pre><code class="language-bash">python -m pip install -r requirements-dev.txt
+python -m pytest -q
+python tools/build_docs.py
+python training/evaluate.py --ik rl --samples 256 --out artifacts/rl-evaluation.json
+python training/evaluate.py --ik pinocchio --samples 256 --out artifacts/pin-evaluation.json
+</code></pre>
+<p>测试使用 fake SDK，不触碰 CAN。MuJoCo 子进程测试为 headless；原生截图需要本机可用的 EGL/OpenGL。Markdown 是维护源，HTML 为同步生成的离线阅读版，可用 <code>python -m http.server 8000</code> 打开 <code>http://127.0.0.1:8000/README.html</code>。</p>
+<h2 id="7">7. 目录与许可</h2>
+<pre><code class="language-text">piper_ik/          控制、IK、轨迹、SDK、WebSocket
+training/          MuJoCo-Warp PPO 训练与 CPU 独立评估
+assets/models/     URDF、MJCF、网格、模型来源
+assets/weights/    现有 PPO checkpoint 与配置/哈希
+web/              离线前端、Three.js
+docs/             RL、Pinocchio、真机、仿真与验证文档
+tests/            控制及协议测试，硬件使用 fake SDK
+tools/            文档构建、可选 SDK 加速度工具
+</code></pre>
+<p>代码以 MIT 发布，第三方模型和前端保留原许可。见 <a href="https://github.com/kelo020304/piper-IK/blob/main/LICENSE">LICENSE</a>、<a href="THIRD_PARTY.html">第三方来源</a>。权重训练来源与限制见 <a href="https://github.com/kelo020304/piper-IK/blob/main/assets/weights/metadata.json">metadata.json</a>。</p><footer>由 README.md 生成 · python tools/build_docs.py · 无需联网加载样式</footer></main></div></body></html>

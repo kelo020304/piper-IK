@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pinocchio IK：代价函数与可调参数</title><style>
+:root{color-scheme:light;--ink:#192d38;--teal:#147e78;--muted:#59707d;--line:#dce6e8}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;color:var(--ink);background:#f3f7f7;font:16px/1.8 system-ui,-apple-system,"Noto Sans CJK SC",sans-serif}
+header{background:white;border-bottom:1px solid var(--line);padding:14px max(20px,calc((100vw - 1240px)/2));display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+header strong{letter-spacing:2px}a{color:var(--teal);text-underline-offset:3px}header a{text-decoration:none;font-size:14px}
+.layout{max-width:1280px;margin:auto;display:grid;grid-template-columns:210px minmax(0,1fr);gap:32px;padding:32px 24px}
+aside{align-self:start;position:sticky;top:20px;max-height:90vh;overflow:auto;font-size:13px}aside ul{list-style:none;padding-left:12px}aside>div>ul{padding-left:0}aside a{text-decoration:none}
+main{min-width:0;background:white;border:1px solid var(--line);border-radius:16px;padding:32px 40px}
+h1{font-size:32px;line-height:1.3;margin-top:0}h2{margin-top:38px;border-top:1px solid var(--line);padding-top:22px;font-size:23px}h3{font-size:19px}h1,h2,h3{letter-spacing:.2px}
+p{margin:16px 0}blockquote{margin:20px 0;padding:10px 18px;border-left:4px solid var(--teal);background:#eff8f6;font-size:15px}blockquote p{margin:5px 0}
+.table-wrap{overflow:auto;max-width:100%;margin:20px 0}table{border-collapse:collapse;font-size:14px;min-width:600px;width:100%}th,td{text-align:left;vertical-align:top;padding:11px 12px;border:1px solid var(--line)}th{background:#edf5f4}tr:nth-child(even){background:#fafcfc}
+pre{overflow:auto;background:#152b36;color:#e3f1f2;padding:18px;border-radius:10px;font-size:13px;line-height:1.7}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}p code,td code,li code{font-size:.87em;background:#eef3f4;border-radius:3px;padding:2px 4px}pre code{background:none;overflow-wrap:normal}
+img{max-width:100%}footer{color:var(--muted);font-size:12px;margin-top:40px}li{margin:6px 0}
+@media(max-width:800px){.layout{display:block;padding:16px 10px}aside{position:static;max-height:220px;margin:0 10px 20px}main{padding:24px 18px}h1{font-size:26px}header{padding:12px 18px;gap:14px}}
+@media print{body{background:white}.layout{display:block;padding:0}aside,header{display:none}main{border:0;padding:0}pre{white-space:pre-wrap;color:black;background:#f1f3f4}.table-wrap{overflow:visible}table{min-width:0}h2{break-after:avoid}tr{break-inside:avoid}}
+</style></head><body><header><strong>PIPER IK</strong><a href="../README.html">开始</a> <a href="../docs/RL.html">RL</a> <a href="../docs/PINOCCHIO.html">Pinocchio</a> <a href="../docs/HARDWARE.html">真机</a> <a href="../docs/VALIDATION.html">验证</a></header><div class="layout"><aside aria-label="章节导航"><div class="toc">
+<ul>
+<li><a href="#1">1. 算法实际做什么</a></li>
+<li><a href="#2">2. 坐标系和代价</a></li>
+<li><a href="#3">3. 可调整的位置与意义</a></li>
+<li><a href="#4">4. 与公共平滑器的关系</a></li>
+<li><a href="#5">5. 调整建议与验证</a></li>
+</ul>
+</div>
+</aside><main><h1 id="pinocchio-ik">Pinocchio IK：代价函数与可调参数</h1>
+<p><a href="../README.html">返回 README</a> · <a href="PINOCCHIO.html">HTML 版</a> · <a href="RL.html">RL</a></p>
+<h2 id="1">1. 算法实际做什么</h2>
+<p>Pinocchio 提供正运动学、SE(3) 对数与 Jacobian；本仓库在其上实现带边界的阻尼最小二乘迭代。它不是 PPO，也没有训练过程。</p>
+<p>源文件：<a href="https://github.com/kelo020304/piper-IK/blob/main/piper_ik/pin_solver.py">pin_solver.py</a>，实时入口为 <code>Engine.tick() → PinIK.solve(goal_flange, previous_ik_solution, max_iter=40)</code>。使用前一拍 IK 解作为起点，避免每次从零开始或随机换分支。当前实时路径<strong>不调用</strong>文件中的 <code>track()</code> 或 <code>solve_point()</code>。</p>
+<h2 id="2">2. 坐标系和代价</h2>
+<p>输入目标 <code>G</code> 是 tool0 在基座中的<strong>绝对位姿</strong>；当前位姿为 <code>T(q)</code>。求解器内部：</p>
+<pre><code class="language-text">D = inverse(T(q)) @ G
+e = Log_SE3(D) = [v_x, v_y, v_z, ω_x, ω_y, ω_z]
+W = diag(1, 1, 1, 0.3, 0.3, 0.3)
+pose_cost = ||W e||²
+</code></pre>
+<p><code>e</code> 是在当前 tool0 局部坐标系中的相对 SE(3) 误差；前三维是 SE(3) 对数的线性部分，大角度下不应直接等同于简单 <code>p_goal-p_current</code>。单独报告的位置误差为两位置的欧氏距离，姿态误差为相对旋转角。</p>
+<p>每次迭代使用 LOCAL 帧 Jacobian，并通过 <code>-Jlog6(D.inverse())</code> 修正成误差 Jacobian。令 <code>J_e</code> 为修正后的 Jacobian，<code>J=W J_e</code>：</p>
+<pre><code class="language-text">σ = smallest_singular_value(J)
+λ = 1e-7 + max(0, 0.01 − σ)²
+μ = 1e-8
+Δq = argmin ||J Δq + W e||²
+             + λ ||Δq||² + μ ||q + Δq − q_seed||²
+</code></pre>
+<p>约束是关节限位与内部迭代步长交集：<code>max(lower-q,-0.2) ≤ Δq ≤ min(upper-q,0.2)</code>。代码用 <code>scipy.optimize.lsq_linear(..., method='bvls')</code> 解这个子问题，然后从 <code>[1,.5,.25,.125,.0625]</code> 选择能降低<strong>位姿代价</strong>的步长。回溯验收没有再把正则项加进 cost；此处不是单一全局优化器一次求到最优解。</p>
+<h2 id="3">3. 可调整的位置与意义</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>代码位置</th>
+<th>默认</th>
+<th>调整影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PinIK.__init__.weight</code></td>
+<td><code>[1,1,1,.3,.3,.3]</code></td>
+<td>增大后三项更强调姿态；实际平方代价系数为 0.09，不是 0.3。m 与 rad 混合加权，没有通用最优比例</td>
+</tr>
+<tr>
+<td><code>solve()</code> 阻尼底值</td>
+<td><code>1e-7</code></td>
+<td>增大使奇异附近更稳、步子更小，但收敛可能变慢</td>
+</tr>
+<tr>
+<td><code>solve()</code> 奇异阈值</td>
+<td><code>0.01</code></td>
+<td>增大将更早增强阻尼；阈值随权重与 Jacobian 单位一起变化</td>
+</tr>
+<tr>
+<td><code>solve()</code> seed 正则</td>
+<td><code>1e-8</code></td>
+<td>增大倾向少偏离本次 seed，可能降低精度；需要同步 A 和 rhs 中对应项</td>
+</tr>
+<tr>
+<td><code>solve()</code> Δq 边界</td>
+<td><code>±0.2 rad</code></td>
+<td>限制每个内部迭代步，不是速度上限；增大会更激进并可能跨分支</td>
+</tr>
+<tr>
+<td><code>Engine.tick()</code> <code>max_iter</code></td>
+<td>40</td>
+<td>实时迭代预算；增大可能减小残差但拖慢约 50 Hz 循环。<code>solve()</code> 默认 100 不代表控制台用了 100</td>
+</tr>
+<tr>
+<td><code>solve()</code> 位置阈值</td>
+<td><code>1e-4 m</code></td>
+<td>算法停止条件；减小会多迭代，不能保证真机相同精度</td>
+</tr>
+<tr>
+<td><code>solve()</code> 姿态阈值</td>
+<td><code>1e-3 rad</code>（约 0.057°）</td>
+<td>同上，单位为 rad，不是度</td>
+</tr>
+<tr>
+<td><code>solve()</code> BVLS <code>tol</code></td>
+<td><code>1e-10</code></td>
+<td>线性子问题收敛容差；过严可能浪费时间，过松可能降低方向质量</td>
+</tr>
+<tr>
+<td><code>solve()</code> alpha 列表</td>
+<td><code>1,.5,.25,.125,.0625</code></td>
+<td>多加更小步长可能救回局部下降，也增加 FK 开销</td>
+</tr>
+<tr>
+<td><code>solve_point()</code> <code>restarts</code></td>
+<td>16</td>
+<td>仅离线点查询的多起点搜索；不宜直接用于连续实机控制，可能换分支</td>
+</tr>
+<tr>
+<td><code>track()</code> vmax / amax</td>
+<td>1.2 rad/s / 6 rad/s²</td>
+<td>备用独立跟踪 API 的参数；<strong>当前控制台没有使用这一路径</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>改 Pinocchio 参数无需重训，但应重跑离线评估和连续目标测试。不要把速度/轨迹平滑调节写到误差权重里：前者在 Ruckig，后者在 IK。</p>
+<h2 id="4">4. 与公共平滑器的关系</h2>
+<pre><code class="language-text">基座绝对 TCP 目标
+  → PoseReference：三层位置 / SO(3) 参考滤波
+  → 去除 TCP 偏移，得到基座绝对 tool0 目标
+  → PinIK.solve：前一拍 IK 解 warm start
+  → Ruckig：绝对关节目标、保留规划速度/加速度
+  → SDK 绝对关节角，或仿真关节回放
+</code></pre>
+<p><code>trajectory.py → PoseReference.step()</code> 每层 <code>alpha = 1-exp(-dt/tau)</code>；姿态使用 <code>Log(R_source @ R_stage.T)</code>，左乘最短旋转更新。三层都用 <code>tau=.06 s</code>，持续缓变输入的低频滞后大致是三层之和，不应把 tau 当成总延迟。该估算不含 IK、Ruckig、电机和可选速度限幅。</p>
+<p>Ruckig 每次目标速度与加速度设为零，但新目标到来时<strong>保留当前规划速度和加速度</strong>，不会每拍强制把当前速度清零。输入目标若密集跳变仍可能导致反复制动；没有零超调保证。参数表在 <a href="../README.html">README</a>。</p>
+<h2 id="5">5. 调整建议与验证</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>表现</th>
+<th>优先检查</th>
+<th>不应直接得出的结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>接近目标但姿态残差较大</td>
+<td>姿态权重、奇异值、是否到关节限位、目标是否可达</td>
+<td>不一定是迭代次数太少</td>
+</tr>
+<tr>
+<td>起步/换方向抖动</td>
+<td>键盘目标序列、tau、Ruckig 加速度/jerk、SDK 执行模式</td>
+<td>不应通过无限放大目标步长解决</td>
+</tr>
+<tr>
+<td>指令已到位但实机跟不上</td>
+<td>实测/指令差异、SDK speed_percent 与电机限制</td>
+<td>不是 Pinocchio 代价自动失效</td>
+</tr>
+<tr>
+<td>换姿态时跳分支</td>
+<td>seed 是否被重置、是否误用 solve_point、多解/奇异区</td>
+<td>同一个末端目标不保证关节解唯一</td>
+</tr>
+</tbody>
+</table></div>
+<pre><code class="language-bash">source .venv/bin/activate
+python -m pytest -q tests/test_controls.py tests/test_trajectory.py tests/test_coordinate_contract.py
+python training/evaluate.py --ik pinocchio --samples 256 --seed 94027 \
+  --out artifacts/pin-evaluation.json
+./run.sh --sim mujoco --ik pinocchio
+</code></pre>
+<p>当前没有环境碰撞代价、自碰撞检测、力控或可达性全局证明。<code>IKResult.converged=False</code> 表示在预算/限位/局部极小等条件下未达到阈值；Engine 仍让轨迹器跟踪返回的最佳局部关节解，界面必须结合残差判断。</p><footer>由 docs/PINOCCHIO.md 生成 · python tools/build_docs.py · 无需联网加载样式</footer></main></div></body></html>
