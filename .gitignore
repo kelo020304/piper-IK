@@ -10,3 +10,5 @@ artifacts/
 training/runs/
 *.tmp
 *.egg-info/
+build/
+dist/

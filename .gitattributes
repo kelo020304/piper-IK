@@ -1,7 +1,3 @@
 * text=auto
-*.STL binary
 *.pt binary
 *.png binary
-# Preserve upstream source formatting.
-web/vendor/* -whitespace
-assets/models/piper.urdf -whitespace

@@ -56,7 +56,7 @@ def validate(model,env,seed=8021):
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--steps',type=int,default=20_000_000);ap.add_argument('--envs',type=int,default=2048);ap.add_argument('--out',default='runs/ppo_v1');ap.add_argument('--resume');ap.add_argument('--seed',type=int,default=7);ap.add_argument('--precision',action='store_true');ap.add_argument('--centered',action='store_true');args=ap.parse_args()
     from warp_env import WarpIKEnv
-    if not torch.cuda.is_available():ap.error('Training requires an NVIDIA CUDA GPU; CPU inference is available through run.sh')
+    if not torch.cuda.is_available():ap.error('Training requires an NVIDIA CUDA GPU; CPU inference is available through PiperIK')
     if args.steps<=0 or args.envs<=0:ap.error('--steps and --envs must be positive')
     args.centered=args.precision and (args.centered or 'centered' in args.out)
     torch.set_num_threads(2);torch.set_num_interop_threads(2)

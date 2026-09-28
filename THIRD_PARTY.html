@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>第三方来源</title><style>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>来源与许可</title><style>
 :root{color-scheme:light;--ink:#192d38;--teal:#147e78;--muted:#59707d;--line:#dce6e8}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
 body{margin:0;color:var(--ink);background:#f3f7f7;font:16px/1.8 system-ui,-apple-system,"Noto Sans CJK SC",sans-serif}
@@ -15,40 +15,34 @@ pre{overflow:auto;background:#152b36;color:#e3f1f2;padding:18px;border-radius:10
 img{max-width:100%}footer{color:var(--muted);font-size:12px;margin-top:40px}li{margin:6px 0}
 @media(max-width:800px){.layout{display:block;padding:16px 10px}aside{position:static;max-height:220px;margin:0 10px 20px}main{padding:24px 18px}h1{font-size:26px}header{padding:12px 18px;gap:14px}}
 @media print{body{background:white}.layout{display:block;padding:0}aside,header{display:none}main{border:0;padding:0}pre{white-space:pre-wrap;color:black;background:#f1f3f4}.table-wrap{overflow:visible}table{min-width:0}h2{break-after:avoid}tr{break-inside:avoid}}
-</style></head><body><header><strong>PIPER IK</strong><a href="README.html">开始</a> <a href="docs/RL.html">RL</a> <a href="docs/PINOCCHIO.html">Pinocchio</a> <a href="docs/HARDWARE.html">真机</a> <a href="docs/VALIDATION.html">验证</a></header><div class="layout"><aside aria-label="章节导航"><div class="toc">
+</style></head><body><header><strong>PIPER IK</strong><a href="README.html">开始</a> <a href="docs/RL.html">RL</a> <a href="docs/PINOCCHIO.html">Pinocchio</a> <a href="docs/FILTER.html">滤波器</a></header><div class="layout"><aside aria-label="章节导航"><div class="toc">
 <ul></ul>
 </div>
-</aside><main><h1 id="_1">第三方来源</h1>
+</aside><main><h1 id="_1">来源与许可</h1>
 <div class="table-wrap"><table>
 <thead>
 <tr>
 <th>内容</th>
 <th>来源</th>
-<th>许可与说明</th>
+<th>说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Piper URDF / 网格</td>
+<td>Piper 运动学模型</td>
 <td><a href="https://github.com/agilexrobotics/piper_ros/tree/6cf947c58797775dba148861729a5e87c99564bf">agilexrobotics/piper_ros</a></td>
-<td><a href="https://github.com/kelo020304/piper-IK/blob/main/assets/models/LICENSE">模型 MIT 许可</a>，保留版权；只使用模型资源，不依赖 ROS</td>
-</tr>
-<tr>
-<td>Three.js、OrbitControls、STLLoader</td>
-<td><a href="https://github.com/mrdoob/three.js">three.js</a></td>
-<td><a href="https://github.com/kelo020304/piper-IK/blob/main/web/vendor/THREE-LICENSE.txt">MIT 许可</a>，前端资源已本地包含</td>
+<td>保留关节、连杆和惯性参数；移除 visual/collision 与网格资源。保留 <a href="https://github.com/kelo020304/piper-IK/blob/main/piper_ik/assets/LICENSE">模型 MIT 许可</a>；运行不依赖 ROS</td>
 </tr>
 <tr>
 <td>PPO checkpoint</td>
-<td>本项目既有 MuJoCo-Warp 运动学训练</td>
-<td><a href="https://github.com/kelo020304/piper-IK/blob/main/assets/weights/metadata.json">权重元数据</a>，随项目 MIT 发布；不是 FastUMI / 官方 Piper 权重</td>
+<td>本项目已有 MuJoCo-Warp 运动学训练</td>
+<td><a href="https://github.com/kelo020304/piper-IK/blob/main/piper_ik/assets/metadata.json">元数据</a>，随项目 MIT 发布；不是 FastUMI 或官方 Piper 策略</td>
 </tr>
 <tr>
 <td>Python 依赖</td>
-<td>requirements 文件中的各项目</td>
-<td>单独安装，各自保留上游许可，不由本仓库重新授权</td>
+<td>pyproject.toml / training/requirements.txt</td>
+<td>各项目适用自身许可</td>
 </tr>
 </tbody>
 </table></div>
-<p>模型历史核对记录见 <a href="https://github.com/kelo020304/piper-IK/blob/main/assets/models/provenance.json">provenance.json</a>。其中历史模型哈希和 FK 检查来自整理前的记录；不是本次对全部资产文件的重新审计。</p>
-<p>权重使用 PyTorch checkpoint 格式，包含优化器状态。只加载可信来源的 checkpoint；替换权重时同步更新元数据。</p><footer>由 THIRD_PARTY.md 生成 · python tools/build_docs.py · 无需联网加载样式</footer></main></div></body></html>
+<p>加载 PyTorch checkpoint 只使用可信来源。模型的几何外观不参与 FK/IK；本包不提供碰撞模型。</p><footer>由 THIRD_PARTY.md 生成 · python tools/build_docs.py · 无需联网加载样式</footer></main></div></body></html>

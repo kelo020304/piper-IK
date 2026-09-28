@@ -52,7 +52,7 @@ def build(source, target=None):
     body = body.replace('<table>', '<div class="table-wrap"><table>').replace('</table>', '</table></div>')
     prefix = '../' if target.parent == ROOT/'docs' else ''
     nav = ' '.join(f'<a href="{prefix}{path}">{label}</a>' for path,label in [
-        ('README.html','开始'),('docs/RL.html','RL'),('docs/PINOCCHIO.html','Pinocchio'),('docs/HARDWARE.html','真机'),('docs/VALIDATION.html','验证')])
+        ('README.html','开始'),('docs/RL.html','RL'),('docs/PINOCCHIO.html','Pinocchio'),('docs/FILTER.html','滤波器')])
     title = source.read_text().splitlines()[0].lstrip('# ')
     target.write_text(f'<!doctype html>\n<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)}</title><style>{CSS}</style></head><body><header><strong>PIPER IK</strong>{nav}</header><div class="layout"><aside aria-label="章节导航">{md.toc}</aside><main>{body}<footer>由 {escape(source.relative_to(ROOT).as_posix())} 生成 · python tools/build_docs.py · 无需联网加载样式</footer></main></div></body></html>\n')
     print(target.relative_to(ROOT))
@@ -61,5 +61,3 @@ def build(source, target=None):
 if __name__ == '__main__':
     for source in SOURCES:
         build(source)
-    for name in ('HARDWARE', 'SIMULATORS'):
-        build(ROOT/'docs'/f'{name}.md', ROOT/f'{name}.html')

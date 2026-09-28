@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "piper-ik"
+version = "0.2.0"
+description = "ROS-free Piper IK with interchangeable Pinocchio / PPO backends and a third-order pose filter"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dependencies = ["numpy>=1.26,<3", "scipy>=1.13,<2", "pin==3.7.0"]
+
+[project.optional-dependencies]
+rl = ["torch>=2.6,<3"]
+dev = ["pytest>=8,<10", "markdown>=3.7,<4", "build>=1,<2"]
+
+[project.urls]
+Repository = "https://github.com/kelo020304/piper-IK"
+
+[tool.setuptools.packages.find]
+include = ["piper_ik*"]
+
+[tool.setuptools.package-data]
+piper_ik = ["assets/*.urdf", "assets/*.xml", "assets/*.pt", "assets/*.json", "assets/LICENSE"]

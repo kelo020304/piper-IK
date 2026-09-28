@@ -1,8 +1,8 @@
-# Piper IK
-- Standalone runtime and training; no ROS imports, services or sibling-directory dependencies.
-- Never connect CAN or run a real SDK for development tests. Use injected fake SDKs.
-- Startup remains disconnected; hardware access requires explicit CLI authorization and UI actions.
-- Keep base-frame absolute TCP targets, base-axis keyboard increments, wxyz RL observations, and absolute SDK joint commands consistent. See README.md.
-- Runtime simulators are kinematic visualization, not physical actuator validation.
-- Maintain README.md / README.html and docs/*.md / *.html together using tools/build_docs.py.
-- Test changed control paths with pytest; never restart a user's existing hardware console.
+# Piper IK SDK
+- Keep the public API small: PiperIK, IKBackend, IKResult, solver configs, ThirdOrderPoseFilter.
+- No ROS, device I/O, web servers or simulator launchers in this package.
+- Targets and FK are absolute base-frame TCP poses; joints are absolute radians.
+- Custom backends receive base-frame tool0 targets. Preserve the TCP conversion contract.
+- Keep optional Torch imports lazy. Filtering does not import Pinocchio or Torch.
+- Maintain concise Markdown and generated HTML docs together with tools/build_docs.py.
+- Test FK/IK, filtering, wheel resources and the training/deployment observation contract.

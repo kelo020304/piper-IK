@@ -33,7 +33,7 @@ class WarpIKEnv:
         self.position_tol=.003 if precision else .05
         self.orientation_tol=float(np.deg2rad(1.5)) if precision else .2
         torch.manual_seed(seed)
-        self.cpu=mujoco.MjModel.from_xml_path(str(ROOT.parent/'assets/models/piper.xml'))
+        self.cpu=mujoco.MjModel.from_xml_path(str(ROOT.parent/'piper_ik/assets/piper.xml'))
         self.cpu.geom_contype[:]=0;self.cpu.geom_conaffinity[:]=0
         self.body=self.cpu.body('tool0').id
         with wp.ScopedDevice(self.device):
@@ -112,4 +112,4 @@ class WarpIKEnv:
             data.qpos[:]=angles;mujoco.mj_kinematics(self.cpu,data)
             ep.append(np.linalg.norm(data.xpos[self.body]-gp[i]))
             eq.append(min(np.linalg.norm(data.xquat[self.body]-gq[i]),np.linalg.norm(data.xquat[self.body]+gq[i])))
-        return {'samples':count,'max_position_error_m':float(max(ep)),'max_quaternion_l2_error':float(max(eq))}
+        return {'samples':len(q),'max_position_error_m':float(max(ep)),'max_quaternion_l2_error':float(max(eq))}
