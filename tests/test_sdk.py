@@ -173,3 +173,20 @@ def test_packaged_mujoco_training_model_matches_fk():
         data.qpos[:]=q; mj.mj_kinematics(model,data); body=model.body('tool0').id; T=ik.fk(q)
         np.testing.assert_allclose(T[:3,3],data.xpos[body],atol=2e-6)
         np.testing.assert_allclose(T[:3,:3],data.xmat[body].reshape(3,3),atol=2e-5)
+
+
+def test_feedback_fk_preserves_out_of_limit_measurement_without_relaxing_ik():
+    ik = PiperIK()
+    lo, hi = ik.joint_limits
+    q = (lo + hi) / 2
+    q[4] = hi[4] + 3e-6
+    with pytest.raises(ValueError):
+        ik.fk(q)
+    measured = ik.fk(q, check_limits=False)
+    assert np.isfinite(measured).all()
+    assert not np.array_equal(measured, ik.fk(np.clip(q, lo, hi)))
+    with pytest.raises(ValueError):
+        ik.solve(measured, q)
+    q[0] = np.nan
+    with pytest.raises(ValueError):
+        ik.fk(q, check_limits=False)

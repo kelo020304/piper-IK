@@ -77,8 +77,8 @@ python examples/filter_target.py
 <td>选择求解器；默认 TCP 为模型 <code>tool0</code>（与 link6 原点重合）</td>
 </tr>
 <tr>
-<td><code>fk(q) → ndarray(4,4)</code></td>
-<td>TCP 在机器人基座中的绝对位姿</td>
+<td><code>fk(q, check_limits=True) → ndarray(4,4)</code></td>
+<td>TCP 在机器人基座中的绝对位姿；仅计算实测反馈时可设 <code>check_limits=False</code>，保留限位外原始反馈，不裁剪。IK 的关节限位校验不变。</td>
 </tr>
 <tr>
 <td><code>solve(target, seed) → IKResult</code></td>

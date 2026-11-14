@@ -54,7 +54,7 @@ python examples/filter_target.py
 | 接口 / 数据 | 定义 |
 | --- | --- |
 | `PiperIK(backend="pinocchio", tcp=None)` | 选择求解器；默认 TCP 为模型 `tool0`（与 link6 原点重合） |
-| `fk(q) → ndarray(4,4)` | TCP 在机器人基座中的绝对位姿 |
+| `fk(q, check_limits=True) → ndarray(4,4)` | TCP 在机器人基座中的绝对位姿；仅计算实测反馈时可设 `check_limits=False`，保留限位外原始反馈，不裁剪。IK 的关节限位校验不变。 |
 | `solve(target, seed) → IKResult` | 目标为同一基座中的绝对 TCP 位姿；seed 为六个绝对关节角 |
 | `result.q` | 六个绝对关节角，rad；**不是关节增量** |
 | `result.converged` | TCP 位置和姿态残差均满足所选后端的容差 |

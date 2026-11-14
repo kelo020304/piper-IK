@@ -137,17 +137,22 @@ class PiperIK:
         """Return independent (lower, upper) six-vectors in radians."""
         return self._model.lower.copy(), self._model.upper.copy()
 
-    def _joints(self, q):
+    def _joints(self, q, *, check_limits=True):
         q = np.array(q, dtype=float, copy=True)
         if q.shape != (6,) or not np.isfinite(q).all():
             raise ValueError('q must contain six finite joint angles in radians')
-        if np.any(q < self._model.lower) or np.any(q > self._model.upper):
+        if check_limits and (np.any(q < self._model.lower) or np.any(q > self._model.upper)):
             raise ValueError('q exceeds model joint limits')
         return q
 
-    def fk(self, q):
-        """Return the absolute TCP pose in the base frame (4x4 matrix)."""
-        return self._model.fk(self._joints(q)).homogeneous.copy() @ self._tcp
+    def fk(self, q, *, check_limits=True):
+        """Return absolute base-frame TCP pose (4x4).
+
+        Use check_limits=False only to observe measured joints, which may cross
+        model limits through encoder quantization or simulator soft contacts.
+        Values are never clipped; shape/finite checks and IK limits still apply.
+        """
+        return self._model.fk(self._joints(q, check_limits=check_limits)).homogeneous.copy() @ self._tcp
 
     def solve(self, target, seed):
         """Solve an absolute TCP target from six absolute seed angles.
