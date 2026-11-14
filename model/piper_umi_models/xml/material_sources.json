@@ -1,0 +1,1000 @@
+{
+  "source": "https://github.com/agilexrobotics/piper_ros/tree/noetic/src/piper_description/meshes/dae",
+  "archive_sha256": "1d1b27475e9d7f5ee7736310fdd743aa9a9680035018878e83341fb088566f25",
+  "material_source_files": {
+    "base_link.dae": "3c9a5f47db03dfbaa75fc2a98135bd5c7d0e3661c2a601b7372bd04e3cfdb689",
+    "link2.dae": "64e70cd8927b3f4d23f056f978e3f1004ca8d6f6a01843ef6a5e08075be2c6f3",
+    "link5.dae": "cb463d5e034adb780fea4a0b7d716d1b3b1de1535c728d747a3370bc347f95e2",
+    "link4.dae": "d74c2f686f8e42e0b71044afa29f2726cddfb346f4e2d92f8566489be5882a14",
+    "link1.dae": "2bb0e08b05a4de1a1c3f073c59dde29335ba3cec9a020e0a09735108c0420b28",
+    "link6.dae": "397e24f536d1f0827ab79adce41af87c016d5869098601284eefe8748510cda6",
+    "link3.dae": "c3f3f592868362852da55bdfc6fdbbfeef653bb8e226721dbdd448161f298d04"
+  },
+  "materials": {
+    "Material-塑胶_024-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "base_link.dae"
+      ]
+    },
+    "a0000000-0000-0000-0000-000000000000_004-material": {
+      "rgba": [
+        0.980392,
+        0.980392,
+        0.980392,
+        1.0
+      ],
+      "dae_sources": [
+        "base_link.dae"
+      ]
+    },
+    "Material-金属_723-material": {
+      "rgba": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "dae_sources": [
+        "base_link.dae",
+        "link1.dae"
+      ]
+    },
+    "Material-金属_020-material": {
+      "rgba": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "dae_sources": [
+        "base_link.dae",
+        "link1.dae"
+      ]
+    },
+    "a0000000-0000-0000-0000-000000000000-material": {
+      "rgba": [
+        0.980392,
+        0.980392,
+        0.980392,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__2__003-material": {
+      "rgba": [
+        0.086275,
+        0.086275,
+        0.086275,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__3__023-material": {
+      "rgba": [
+        0.815686,
+        0.14902,
+        0.14902,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__2__002-material": {
+      "rgba": [
+        0.086275,
+        0.086275,
+        0.086275,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__2__001-material": {
+      "rgba": [
+        0.086275,
+        0.086275,
+        0.086275,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__3__022-material": {
+      "rgba": [
+        0.815686,
+        0.14902,
+        0.14902,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__2_-material": {
+      "rgba": [
+        0.086275,
+        0.086275,
+        0.086275,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__4__001-material": {
+      "rgba": [
+        0.501961,
+        0.501961,
+        0.501961,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__3__021-material": {
+      "rgba": [
+        0.815686,
+        0.14902,
+        0.14902,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__3__020-material": {
+      "rgba": [
+        0.815686,
+        0.14902,
+        0.14902,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__4_-material": {
+      "rgba": [
+        0.501961,
+        0.501961,
+        0.501961,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__3__019-material": {
+      "rgba": [
+        0.815686,
+        0.14902,
+        0.14902,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__3__018-material": {
+      "rgba": [
+        0.815686,
+        0.14902,
+        0.14902,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__3__017-material": {
+      "rgba": [
+        0.815686,
+        0.14902,
+        0.14902,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__3__016-material": {
+      "rgba": [
+        0.815686,
+        0.14902,
+        0.14902,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__3__015-material": {
+      "rgba": [
+        0.815686,
+        0.14902,
+        0.14902,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__3__014-material": {
+      "rgba": [
+        0.815686,
+        0.14902,
+        0.14902,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__3__013-material": {
+      "rgba": [
+        0.815686,
+        0.14902,
+        0.14902,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__3__012-material": {
+      "rgba": [
+        0.815686,
+        0.14902,
+        0.14902,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__3__011-material": {
+      "rgba": [
+        0.815686,
+        0.14902,
+        0.14902,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__3__010-material": {
+      "rgba": [
+        0.815686,
+        0.14902,
+        0.14902,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__3__009-material": {
+      "rgba": [
+        0.815686,
+        0.14902,
+        0.14902,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__3__008-material": {
+      "rgba": [
+        0.815686,
+        0.14902,
+        0.14902,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__3__007-material": {
+      "rgba": [
+        0.815686,
+        0.14902,
+        0.14902,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__3__006-material": {
+      "rgba": [
+        0.815686,
+        0.14902,
+        0.14902,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__3__005-material": {
+      "rgba": [
+        0.815686,
+        0.14902,
+        0.14902,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__3__004-material": {
+      "rgba": [
+        0.815686,
+        0.14902,
+        0.14902,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶_053-material": {
+      "rgba": [
+        0.141176,
+        0.141176,
+        0.141176,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶_052-material": {
+      "rgba": [
+        0.141176,
+        0.141176,
+        0.141176,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶_051-material": {
+      "rgba": [
+        0.141176,
+        0.141176,
+        0.141176,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶_050-material": {
+      "rgba": [
+        0.141176,
+        0.141176,
+        0.141176,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶__1__004-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link2.dae"
+      ]
+    },
+    "Material-塑胶_044-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link5.dae"
+      ]
+    },
+    "Material-塑胶_043-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link5.dae"
+      ]
+    },
+    "a0000000-0000-0000-0000-000000000000_007-material": {
+      "rgba": [
+        0.980392,
+        0.980392,
+        0.980392,
+        1.0
+      ],
+      "dae_sources": [
+        "link5.dae"
+      ]
+    },
+    "Material-塑胶_042-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link5.dae"
+      ]
+    },
+    "Material-塑胶__1__015-material": {
+      "rgba": [
+        0.141176,
+        0.141176,
+        0.141176,
+        1.0
+      ],
+      "dae_sources": [
+        "link5.dae"
+      ]
+    },
+    "Material-塑胶_041-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link5.dae"
+      ]
+    },
+    "Material-塑胶_040-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link5.dae"
+      ]
+    },
+    "Material-金属_1355-material": {
+      "rgba": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "dae_sources": [
+        "link5.dae",
+        "link4.dae",
+        "link6.dae"
+      ]
+    },
+    "Material-金属_1178-material": {
+      "rgba": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "dae_sources": [
+        "link5.dae",
+        "link4.dae",
+        "link6.dae"
+      ]
+    },
+    "Material-塑胶_039-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link4.dae"
+      ]
+    },
+    "Material-塑胶_038-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link4.dae"
+      ]
+    },
+    "Material-塑胶_037-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link4.dae"
+      ]
+    },
+    "Material-塑胶__1__014-material": {
+      "rgba": [
+        0.141176,
+        0.141176,
+        0.141176,
+        1.0
+      ],
+      "dae_sources": [
+        "link4.dae"
+      ]
+    },
+    "Material-塑胶_036-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link4.dae"
+      ]
+    },
+    "Material-塑胶_025-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link1.dae"
+      ]
+    },
+    "Material-塑胶__2__040-material": {
+      "rgba": [
+        0.784314,
+        0.784314,
+        0.784314,
+        1.0
+      ],
+      "dae_sources": [
+        "link6.dae"
+      ]
+    },
+    "Material-塑胶__2__039-material": {
+      "rgba": [
+        0.784314,
+        0.784314,
+        0.784314,
+        1.0
+      ],
+      "dae_sources": [
+        "link6.dae"
+      ]
+    },
+    "Material-塑胶__2__038-material": {
+      "rgba": [
+        0.784314,
+        0.784314,
+        0.784314,
+        1.0
+      ],
+      "dae_sources": [
+        "link6.dae"
+      ]
+    },
+    "Material-塑胶__2__037-material": {
+      "rgba": [
+        0.784314,
+        0.784314,
+        0.784314,
+        1.0
+      ],
+      "dae_sources": [
+        "link6.dae"
+      ]
+    },
+    "Material-塑胶__2__036-material": {
+      "rgba": [
+        0.784314,
+        0.784314,
+        0.784314,
+        1.0
+      ],
+      "dae_sources": [
+        "link6.dae"
+      ]
+    },
+    "Material-塑胶__2__035-material": {
+      "rgba": [
+        0.784314,
+        0.784314,
+        0.784314,
+        1.0
+      ],
+      "dae_sources": [
+        "link6.dae"
+      ]
+    },
+    "Material-塑胶__2__034-material": {
+      "rgba": [
+        0.784314,
+        0.784314,
+        0.784314,
+        1.0
+      ],
+      "dae_sources": [
+        "link6.dae"
+      ]
+    },
+    "Material-塑胶__2__033-material": {
+      "rgba": [
+        0.784314,
+        0.784314,
+        0.784314,
+        1.0
+      ],
+      "dae_sources": [
+        "link6.dae"
+      ]
+    },
+    "Material-塑胶__1__016-material": {
+      "rgba": [
+        0.098039,
+        0.098039,
+        0.098039,
+        1.0
+      ],
+      "dae_sources": [
+        "link6.dae"
+      ]
+    },
+    "Material-塑胶_078-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶_077-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶_076-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶_075-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶_074-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶_073-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶_072-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶_071-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶_070-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶_069-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶_068-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶_067-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶_066-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶_065-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶_064-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶_063-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶_062-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶_061-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶_060-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶__3__025-material": {
+      "rgba": [
+        0.815686,
+        0.14902,
+        0.14902,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶_059-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶__1__006-material": {
+      "rgba": [
+        0.141176,
+        0.141176,
+        0.141176,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶_058-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶_057-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶_056-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶_055-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶_054-material": {
+      "rgba": [
+        0.588235,
+        0.588235,
+        0.588235,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶__3__024-material": {
+      "rgba": [
+        0.815686,
+        0.14902,
+        0.14902,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    },
+    "Material-塑胶__1__005-material": {
+      "rgba": [
+        0.141176,
+        0.141176,
+        0.141176,
+        1.0
+      ],
+      "dae_sources": [
+        "link3.dae"
+      ]
+    }
+  }
+}

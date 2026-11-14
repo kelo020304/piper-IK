@@ -1,0 +1,126 @@
+{
+  "urdf_relocation": {
+    "loaded": true,
+    "mesh_references": 135,
+    "nq": 8,
+    "nu": 0
+  },
+  "xml_relocation": {
+    "loaded": true,
+    "mesh_references": 135,
+    "nq": 8,
+    "nu": 7
+  },
+  "usd_relocation": {
+    "loaded": true,
+    "layers": 1,
+    "external_assets": 0,
+    "unresolved": 0,
+    "rigid_bodies": 11
+  },
+  "usd_scene_relocation": {
+    "layers": 2,
+    "unresolved": 0
+  },
+  "urdf_mujoco_fk": {
+    "configurations": 32,
+    "max_position_error_m": 5.302809019544106e-11,
+    "max_rotation_error_rad": 1.5810217764317985e-10
+  },
+  "usd_zero_pose": {
+    "max_transform_entry_error": 3.369216758364324e-08
+  },
+  "retained_step_geometry": {
+    "visual_parts": 8,
+    "max_vertex_distance_m": 7.402154676423506e-09,
+    "scope": "Retained custom gripper parts in their source CAD frames; stock mounting offset is intentional."
+  },
+  "appearance": {
+    "visual_parts": 86,
+    "zip_arm_parts": 76,
+    "native_disk_and_flange": true,
+    "matching_colors_all_formats": true,
+    "unresolved_obj_material_libraries": 0,
+    "supports_rgba": [
+      0.95,
+      0.95,
+      0.95,
+      1.0
+    ],
+    "fingers_rgba": [
+      1.0,
+      0.67,
+      0.3,
+      1.0
+    ]
+  },
+  "cad_pose_contacts": 0,
+  "mujoco_dynamics": {
+    "version": "3.3.5",
+    "gravity_enabled": true,
+    "collisions_enabled": true,
+    "steps": 5500,
+    "warnings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "gripper_sweeps": [
+      {
+        "command_m": 0.0,
+        "left_m": 1.1869639761423712e-18,
+        "right_m": 3.686939037006232e-11,
+        "mimic_error_m": 3.686938918309834e-11,
+        "tracking_error_m": 1.1869639761423712e-18,
+        "contacts": 0
+      },
+      {
+        "command_m": 0.025,
+        "left_m": 0.024999999999999984,
+        "right_m": 0.025000000036869384,
+        "mimic_error_m": 3.6869399894223776e-11,
+        "tracking_error_m": 1.734723475976807e-17,
+        "contacts": 0
+      },
+      {
+        "command_m": 0.05,
+        "left_m": 0.04999999997599691,
+        "right_m": 0.05000000001277292,
+        "mimic_error_m": 3.6776005851724136e-11,
+        "tracking_error_m": 2.4003091181334923e-11,
+        "contacts": 0
+      },
+      {
+        "command_m": 0.0,
+        "left_m": 1.1380779786705135e-18,
+        "right_m": 3.686939005200602e-11,
+        "mimic_error_m": 3.6869388913928045e-11,
+        "tracking_error_m": 1.1380779786705135e-18,
+        "contacts": 0
+      }
+    ],
+    "arm_target": [
+      0.15,
+      0.5,
+      -0.8,
+      0.15,
+      0.2,
+      -0.3
+    ],
+    "arm_final": [
+      0.14999999999999963,
+      0.49891504514034807,
+      -0.7955752896625171,
+      0.14997745409781094,
+      0.20110507759682064,
+      -0.2999995755086323
+    ],
+    "max_arm_tracking_error_rad": 0.004424710337482929
+  },
+  "passed": true
+}

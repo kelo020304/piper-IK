@@ -1,0 +1,32 @@
+{
+  "name": "UMI fingertip TCP",
+  "transform": "link6 (flange) -> tool0 (TCP), 4x4, metres",
+  "source": "data_viewer runtime_motion.make_ik: piper_umi.xml tool0 against the piper-IK flange at the console's connect posture, 2026-10-13",
+  "use": "PiperIK solves with this matrix as is; model/piper_umi.urdf writes the same transform as tool0_joint xyz / rpy (equal to 8e-16)",
+  "matrix": [
+    [
+      0.9999999980216774,
+      -3.5772620870473824e-06,
+      -6.280006227568635e-05,
+      -9.496379891782425e-06
+    ],
+    [
+      3.577930595324462e-06,
+      0.9999999999369414,
+      1.0644914703671969e-05,
+      -0.00024229404385042705
+    ],
+    [
+      6.28000241924137e-05,
+      -1.0645139376871608e-05,
+      0.9999999979714183,
+      0.2171072439753913
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ]
+}

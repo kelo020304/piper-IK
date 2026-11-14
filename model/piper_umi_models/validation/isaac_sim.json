@@ -1,0 +1,105 @@
+{
+  "isaac_sim_version": "5.1.0.0",
+  "dof_names": [
+    "joint1",
+    "joint2",
+    "joint3",
+    "joint4",
+    "joint5",
+    "joint6",
+    "gripper_left_joint",
+    "gripper_right_joint"
+  ],
+  "body_names": [
+    "base_link",
+    "link1",
+    "link2",
+    "link3",
+    "link4",
+    "link5",
+    "link6",
+    "flange_link",
+    "gripper_base",
+    "left_finger",
+    "right_finger"
+  ],
+  "fk_errors": [
+    {
+      "link": "link6",
+      "position_m": 6.233975221602951e-08,
+      "orientation_rad": 4.60327219283018e-07
+    },
+    {
+      "link": "left_finger",
+      "position_m": 8.711718875452207e-08,
+      "orientation_rad": 5.092389450650866e-07
+    },
+    {
+      "link": "right_finger",
+      "position_m": 1.0974634704404744e-07,
+      "orientation_rad": 4.637018039667343e-07
+    },
+    {
+      "link": "link6",
+      "position_m": 8.52380872098984e-08,
+      "orientation_rad": 5.313785452696888e-07
+    },
+    {
+      "link": "left_finger",
+      "position_m": 1.162997312309167e-07,
+      "orientation_rad": 4.4724484822860804e-07
+    },
+    {
+      "link": "right_finger",
+      "position_m": 1.2268443750572667e-07,
+      "orientation_rad": 4.852706222674583e-07
+    },
+    {
+      "link": "link6",
+      "position_m": 1.0556248420486986e-07,
+      "orientation_rad": 3.387974828634709e-07
+    },
+    {
+      "link": "left_finger",
+      "position_m": 1.0375183795472115e-07,
+      "orientation_rad": 3.8427991412834614e-07
+    },
+    {
+      "link": "right_finger",
+      "position_m": 5.5454964417974236e-08,
+      "orientation_rad": 4.598963886196503e-07
+    }
+  ],
+  "gripper_sweeps": [
+    {
+      "command_m": 0.0,
+      "left_m": 6.797628770982556e-08,
+      "right_m": 6.823244547149443e-08,
+      "mimic_error_m": 2.561577616688737e-10
+    },
+    {
+      "command_m": 0.025,
+      "left_m": 0.024999963119626045,
+      "right_m": 0.024999963119626045,
+      "mimic_error_m": 0.0
+    },
+    {
+      "command_m": 0.05,
+      "left_m": 0.04999994859099388,
+      "right_m": 0.04999994859099388,
+      "mimic_error_m": 0.0
+    },
+    {
+      "command_m": 0.0,
+      "left_m": 8.680983398789976e-08,
+      "right_m": 8.722723521259468e-08,
+      "mimic_error_m": 4.1740122469491325e-10
+    }
+  ],
+  "fk_gravity_disabled": true,
+  "sweep_gravity_disabled": false,
+  "collisions_enabled": true,
+  "max_fk_position_m": 1.2268443750572667e-07,
+  "max_fk_orientation_rad": 5.313785452696888e-07,
+  "max_mimic_error_m": 4.1740122469491325e-10
+}

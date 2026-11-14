@@ -1,0 +1,277 @@
+{
+  "checks": {
+    "urdf_relocation": {
+      "loaded": true,
+      "mesh_references": 135,
+      "nq": 8,
+      "nu": 0
+    },
+    "xml_relocation": {
+      "loaded": true,
+      "mesh_references": 135,
+      "nq": 8,
+      "nu": 7
+    },
+    "usd_relocation": {
+      "loaded": true,
+      "layers": 1,
+      "external_assets": 0,
+      "unresolved": 0,
+      "rigid_bodies": 11
+    },
+    "usd_scene_relocation": {
+      "layers": 2,
+      "unresolved": 0
+    },
+    "urdf_mujoco_fk": {
+      "configurations": 32,
+      "max_position_error_m": 5.302809019544106e-11,
+      "max_rotation_error_rad": 1.5810217764317985e-10
+    },
+    "usd_zero_pose": {
+      "max_transform_entry_error": 3.369216758364324e-08
+    },
+    "retained_step_geometry": {
+      "visual_parts": 8,
+      "max_vertex_distance_m": 7.402154676423506e-09,
+      "scope": "Retained custom gripper parts in their source CAD frames; stock mounting offset is intentional."
+    },
+    "appearance": {
+      "visual_parts": 86,
+      "zip_arm_parts": 76,
+      "native_disk_and_flange": true,
+      "matching_colors_all_formats": true,
+      "unresolved_obj_material_libraries": 0,
+      "supports_rgba": [
+        0.95,
+        0.95,
+        0.95,
+        1.0
+      ],
+      "fingers_rgba": [
+        1.0,
+        0.67,
+        0.3,
+        1.0
+      ]
+    },
+    "cad_pose_contacts": 0,
+    "mujoco_dynamics": {
+      "version": "3.3.5",
+      "gravity_enabled": true,
+      "collisions_enabled": true,
+      "steps": 5500,
+      "warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gripper_sweeps": [
+        {
+          "command_m": 0.0,
+          "left_m": 1.1869639761423712e-18,
+          "right_m": 3.686939037006232e-11,
+          "mimic_error_m": 3.686938918309834e-11,
+          "tracking_error_m": 1.1869639761423712e-18,
+          "contacts": 0
+        },
+        {
+          "command_m": 0.025,
+          "left_m": 0.024999999999999984,
+          "right_m": 0.025000000036869384,
+          "mimic_error_m": 3.6869399894223776e-11,
+          "tracking_error_m": 1.734723475976807e-17,
+          "contacts": 0
+        },
+        {
+          "command_m": 0.05,
+          "left_m": 0.04999999997599691,
+          "right_m": 0.05000000001277292,
+          "mimic_error_m": 3.6776005851724136e-11,
+          "tracking_error_m": 2.4003091181334923e-11,
+          "contacts": 0
+        },
+        {
+          "command_m": 0.0,
+          "left_m": 1.1380779786705135e-18,
+          "right_m": 3.686939005200602e-11,
+          "mimic_error_m": 3.6869388913928045e-11,
+          "tracking_error_m": 1.1380779786705135e-18,
+          "contacts": 0
+        }
+      ],
+      "arm_target": [
+        0.15,
+        0.5,
+        -0.8,
+        0.15,
+        0.2,
+        -0.3
+      ],
+      "arm_final": [
+        0.14999999999999963,
+        0.49891504514034807,
+        -0.7955752896625171,
+        0.14997745409781094,
+        0.20110507759682064,
+        -0.2999995755086323
+      ],
+      "max_arm_tracking_error_rad": 0.004424710337482929
+    },
+    "passed": true
+  },
+  "isaac_sim": {
+    "isaac_sim_version": "5.1.0.0",
+    "dof_names": [
+      "joint1",
+      "joint2",
+      "joint3",
+      "joint4",
+      "joint5",
+      "joint6",
+      "gripper_left_joint",
+      "gripper_right_joint"
+    ],
+    "body_names": [
+      "base_link",
+      "link1",
+      "link2",
+      "link3",
+      "link4",
+      "link5",
+      "link6",
+      "flange_link",
+      "gripper_base",
+      "left_finger",
+      "right_finger"
+    ],
+    "fk_errors": [
+      {
+        "link": "link6",
+        "position_m": 6.233975221602951e-08,
+        "orientation_rad": 4.60327219283018e-07
+      },
+      {
+        "link": "left_finger",
+        "position_m": 8.711718875452207e-08,
+        "orientation_rad": 5.092389450650866e-07
+      },
+      {
+        "link": "right_finger",
+        "position_m": 1.0974634704404744e-07,
+        "orientation_rad": 4.637018039667343e-07
+      },
+      {
+        "link": "link6",
+        "position_m": 8.52380872098984e-08,
+        "orientation_rad": 5.313785452696888e-07
+      },
+      {
+        "link": "left_finger",
+        "position_m": 1.162997312309167e-07,
+        "orientation_rad": 4.4724484822860804e-07
+      },
+      {
+        "link": "right_finger",
+        "position_m": 1.2268443750572667e-07,
+        "orientation_rad": 4.852706222674583e-07
+      },
+      {
+        "link": "link6",
+        "position_m": 1.0556248420486986e-07,
+        "orientation_rad": 3.387974828634709e-07
+      },
+      {
+        "link": "left_finger",
+        "position_m": 1.0375183795472115e-07,
+        "orientation_rad": 3.8427991412834614e-07
+      },
+      {
+        "link": "right_finger",
+        "position_m": 5.5454964417974236e-08,
+        "orientation_rad": 4.598963886196503e-07
+      }
+    ],
+    "gripper_sweeps": [
+      {
+        "command_m": 0.0,
+        "left_m": 6.797628770982556e-08,
+        "right_m": 6.823244547149443e-08,
+        "mimic_error_m": 2.561577616688737e-10
+      },
+      {
+        "command_m": 0.025,
+        "left_m": 0.024999963119626045,
+        "right_m": 0.024999963119626045,
+        "mimic_error_m": 0.0
+      },
+      {
+        "command_m": 0.05,
+        "left_m": 0.04999994859099388,
+        "right_m": 0.04999994859099388,
+        "mimic_error_m": 0.0
+      },
+      {
+        "command_m": 0.0,
+        "left_m": 8.680983398789976e-08,
+        "right_m": 8.722723521259468e-08,
+        "mimic_error_m": 4.1740122469491325e-10
+      }
+    ],
+    "fk_gravity_disabled": true,
+    "sweep_gravity_disabled": false,
+    "collisions_enabled": true,
+    "max_fk_position_m": 1.2268443750572667e-07,
+    "max_fk_orientation_rad": 5.313785452696888e-07,
+    "max_mimic_error_m": 4.1740122469491325e-10
+  },
+  "isaac_render": {
+    "runtime": "Isaac Sim 5.1.0",
+    "renderer": "RaytracedLighting",
+    "scene": "usd/scene.usda",
+    "resolution": [
+      1600,
+      1200
+    ],
+    "postprocessed": false,
+    "fingers_rgba": [
+      1.0,
+      0.67,
+      0.3,
+      1.0
+    ],
+    "views": [
+      {
+        "image": "isaac_sim_overview.png",
+        "eye": [
+          0.72,
+          -0.72,
+          0.57
+        ],
+        "target": [
+          0.0,
+          0.0,
+          0.18
+        ]
+      },
+      {
+        "image": "isaac_sim_gripper.png",
+        "eye": [
+          0.4551272261142731,
+          -0.3802452861517668,
+          0.4790387547016144
+        ],
+        "target": [
+          0.12512722611427307,
+          -0.00024528615176677704,
+          0.24403875470161437
+        ]
+      }
+    ]
+  }
+}

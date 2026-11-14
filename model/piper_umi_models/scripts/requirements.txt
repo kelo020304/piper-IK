@@ -1,0 +1,11 @@
+# Rebuild/validation tools; not required merely to consume the model assets.
+numpy>=1.26,<3
+scipy>=1.11,<2
+trimesh>=4,<5
+mujoco>=3.3.5,<4
+usd-core>=24.11
+Pillow>=10
+imageio>=2.30
+imageio-ffmpeg>=0.5
+# extract_step.py also needs FreeCAD with Part, Import and Mesh modules.
+# validate_isaac.py runs in Isaac Sim's Python (tested 5.1.0), not this venv.

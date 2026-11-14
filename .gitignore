@@ -3,11 +3,6 @@ __pycache__/
 .pytest_cache/
 .venv*/
 *.log
-.env
-.env.*
-config.*.json
-artifacts/
-training/runs/
 *.tmp
 *.egg-info/
 build/

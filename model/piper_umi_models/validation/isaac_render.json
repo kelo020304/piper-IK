@@ -1,0 +1,44 @@
+{
+  "runtime": "Isaac Sim 5.1.0",
+  "renderer": "RaytracedLighting",
+  "scene": "usd/scene.usda",
+  "resolution": [
+    1600,
+    1200
+  ],
+  "postprocessed": false,
+  "fingers_rgba": [
+    1.0,
+    0.67,
+    0.3,
+    1.0
+  ],
+  "views": [
+    {
+      "image": "isaac_sim_overview.png",
+      "eye": [
+        0.72,
+        -0.72,
+        0.57
+      ],
+      "target": [
+        0.0,
+        0.0,
+        0.18
+      ]
+    },
+    {
+      "image": "isaac_sim_gripper.png",
+      "eye": [
+        0.4551272261142731,
+        -0.3802452861517668,
+        0.4790387547016144
+      ],
+      "target": [
+        0.12512722611427307,
+        -0.00024528615176677704,
+        0.24403875470161437
+      ]
+    }
+  ]
+}

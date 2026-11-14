@@ -1,0 +1,11 @@
+*.urdf text eol=lf
+*.xml text eol=lf
+*.usda text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.html text eol=lf
+*.json text eol=lf
+*.stl binary
+*.usd binary
+*.png binary
+*.mp4 binary

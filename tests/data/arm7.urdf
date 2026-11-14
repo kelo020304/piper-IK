@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!-- Test arm for the generic IK (tests/test_generic_arm.py): 7 revolute joints with Panda-like joint origins and limits,
+     names unlike the Piper's (a1..a7, l0..l7), a prismatic finger off the chain, the fingertip TCP frame named "tcp".
+     Kinematics only: no meshes, no inertias. Not a model of any real robot. -->
+<robot name="arm7">
+  <link name="l0"/>
+  <link name="l1"/>
+  <link name="l2"/>
+  <link name="l3"/>
+  <link name="l4"/>
+  <link name="l5"/>
+  <link name="l6"/>
+  <link name="l7"/>
+  <link name="flange"/>
+  <link name="hand"/>
+  <link name="finger"/>
+  <link name="tcp"/>
+  <joint name="a1" type="revolute">
+    <parent link="l0"/><child link="l1"/><origin xyz="0 0 0.333" rpy="0 0 0"/><axis xyz="0 0 1"/>
+    <limit lower="-2.8973" upper="2.8973" effort="87" velocity="2.175"/>
+  </joint>
+  <joint name="a2" type="revolute">
+    <parent link="l1"/><child link="l2"/><origin xyz="0 0 0" rpy="-1.5707963267948966 0 0"/><axis xyz="0 0 1"/>
+    <limit lower="-1.7628" upper="1.7628" effort="87" velocity="2.175"/>
+  </joint>
+  <joint name="a3" type="revolute">
+    <parent link="l2"/><child link="l3"/><origin xyz="0 -0.316 0" rpy="1.5707963267948966 0 0"/><axis xyz="0 0 1"/>
+    <limit lower="-2.8973" upper="2.8973" effort="87" velocity="2.175"/>
+  </joint>
+  <joint name="a4" type="revolute">
+    <parent link="l3"/><child link="l4"/><origin xyz="0.0825 0 0" rpy="1.5707963267948966 0 0"/><axis xyz="0 0 1"/>
+    <limit lower="-3.0718" upper="-0.0698" effort="87" velocity="2.175"/>
+  </joint>
+  <joint name="a5" type="revolute">
+    <parent link="l4"/><child link="l5"/><origin xyz="-0.0825 0.384 0" rpy="-1.5707963267948966 0 0"/><axis xyz="0 0 1"/>
+    <limit lower="-2.8973" upper="2.8973" effort="12" velocity="2.61"/>
+  </joint>
+  <joint name="a6" type="revolute">
+    <parent link="l5"/><child link="l6"/><origin xyz="0 0 0" rpy="1.5707963267948966 0 0"/><axis xyz="0 0 1"/>
+    <limit lower="-0.0175" upper="3.7525" effort="12" velocity="2.61"/>
+  </joint>
+  <joint name="a7" type="revolute">
+    <parent link="l6"/><child link="l7"/><origin xyz="0.088 0 0" rpy="1.5707963267948966 0 0"/><axis xyz="0 0 1"/>
+    <limit lower="-2.8973" upper="2.8973" effort="12" velocity="2.61"/>
+  </joint>
+  <joint name="flange_joint" type="fixed">
+    <parent link="l7"/><child link="flange"/><origin xyz="0 0 0.107" rpy="0 0 0"/>
+  </joint>
+  <joint name="hand_joint" type="fixed">
+    <parent link="flange"/><child link="hand"/><origin xyz="0 0 0" rpy="0 0 -0.7853981633974483"/>
+  </joint>
+  <joint name="finger_joint" type="prismatic">
+    <parent link="hand"/><child link="finger"/><origin xyz="0 0 0.0584" rpy="0 0 0"/><axis xyz="0 1 0"/>
+    <limit lower="0" upper="0.04" effort="20" velocity="0.2"/>
+  </joint>
+  <joint name="tcp_joint" type="fixed">
+    <parent link="hand"/><child link="tcp"/><origin xyz="0 0 0.1034" rpy="0 0 0"/>
+  </joint>
+</robot>
